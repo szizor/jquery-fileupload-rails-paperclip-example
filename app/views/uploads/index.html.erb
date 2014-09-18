@@ -8,7 +8,7 @@
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>
           <span>Add files...</span>
-          <%= f.file_field :upload %>
+           <%= f.file_field :upload, :multiple=>true, :name=>"upload[upload]" %>
         </span>
         <button type="submit" class="btn btn-primary start">
           <i class="icon-upload icon-white"></i>
@@ -116,16 +116,17 @@
   $(function () {
       // Initialize the jQuery File Upload widget:
       $('#fileupload').fileupload();
-      // 
+      //
       // Load existing files:
       $.getJSON($('#fileupload').prop('action'), function (files) {
-        var fu = $('#fileupload').data('blueimpFileupload'), 
+        var fu = $('#fileupload').data('blueimpFileupload'),
           template;
         fu._adjustMaxNumberOfFiles(-files.length);
         console.log(files);
         template = fu._renderDownload(files)
           .appendTo($('#fileupload .files'));
         // Force reflow:
+        debugger
         fu._reflow = fu._transition && template.length &&
           template[0].offsetWidth;
         template.addClass('in');

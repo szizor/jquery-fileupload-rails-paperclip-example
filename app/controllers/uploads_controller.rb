@@ -40,7 +40,9 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(params[:upload])
+    upload_data = { "upload" => params[:upload]["upload"][0] }
+
+    @upload = Upload.new(upload_data)
 
     respond_to do |format|
       if @upload.save
